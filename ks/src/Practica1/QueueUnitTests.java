@@ -1,14 +1,19 @@
 package Practica1;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class QueueUnitTests {
     @Test
     public void addedElementIsInTheQueue() {
         Queue queue = new Queue(10);
         queue.enqueue(5);
-        Assertions.assertEquals(queue.dequeue(),5);
+        assertEquals(queue.dequeue(),5);
     }
 
     @Test
@@ -16,17 +21,17 @@ public class QueueUnitTests {
         Queue queue = new Queue(10);
         int beforeSize = queue.size();
         queue.enqueue(5);
-        Assertions.assertEquals(beforeSize + 1, queue.size());
+        assertEquals(beforeSize + 1, queue.size());
     }
 
     @Test
     public void throwExceptionWhenDequeuingAnEmptyQueue() {
         Queue queue = new Queue(10);
-        QueueException thrown = Assertions.assertThrows(
+        QueueException thrown = assertThrows(
             QueueException.class,
                 () -> queue.dequeue()
         );
-        Assertions.assertTrue(thrown.getMessage().contains("dequeue operation on empty queue"));
+        assertTrue(thrown.getMessage().contains("dequeue operation on empty queue"));
     }
 
     @Test
@@ -37,31 +42,31 @@ public class QueueUnitTests {
         queue.enqueue(5);
         int queueSize = queue.size();
         queue.dequeue();
-        Assertions.assertEquals(queueSize - 1, queue.size());
+        assertEquals(queueSize - 1, queue.size());
     }
 
     @Test
     public void fullQueue() {
         Queue queue = new Queue(1);
-        Assertions.assertFalse(queue.full());
+        assertFalse(queue.full());
         queue.enqueue(1);
-        Assertions.assertTrue(queue.full());
+        assertTrue(queue.full());
     }
 
     @Test
     public void cannotAddToFullQueues() {
         Queue queue = new Queue(0);
-        QueueException thrown = Assertions.assertThrows(
+        QueueException thrown = assertThrows(
                 QueueException.class,
                 () -> queue.enqueue(4)
         );
-        Assertions.assertTrue(thrown.getMessage().contains("enqueue"));
+        assertTrue(thrown.getMessage().contains("enqueue"));
     }
 
     @Test
     public void emptyQueue() {
         Queue queue = new Queue(10);
-        Assertions.assertTrue(queue.empty());
+        assertTrue(queue.empty());
     }
 
 }
