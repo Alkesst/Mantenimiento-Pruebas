@@ -23,8 +23,8 @@ public class Triangulo {
 		return ladosMayoresQueCero() && trianguloValido() && (p!=q && p!=r && q!=r);
 	}
 	
-	public boolean esIsosceles() { //No es eficiente pero es simple
-		return ladosMayoresQueCero() && trianguloValido() && (p==q||p==r||q==r) && !esEquilatero(); 
+	public boolean esIsosceles() { 
+		return ladosMayoresQueCero() && trianguloValido() && (p==q||p==r||q==r) && !(p==q && q==r); 
 	}
 	
 	public boolean esEquilatero() {
