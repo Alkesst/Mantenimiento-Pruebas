@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Triangulo;
 
 public class Triangulo {
     private int catetoA;
@@ -12,13 +12,13 @@ public class Triangulo {
     }
 
     public boolean esEscaleno() {
-        return (catetoA!=catetoB && catetoA!=catetoC && catetoB!=catetoC);
+        return (catetoA != catetoB && catetoA != catetoC && catetoB != catetoC);
     }
 
 
     public boolean esIsosceles() {
-        return (catetoA==catetoB||catetoA==catetoC||catetoB==catetoC) &&
-                !(catetoA==catetoB && catetoB==catetoC);
+        return (catetoA == catetoB || catetoA == catetoC || catetoB == catetoC) &&
+                !(catetoA == catetoB && catetoB == catetoC);
     }
 
 

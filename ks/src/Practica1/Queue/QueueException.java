@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Queue;
 /**
  * Clase excepcion para la gestion de situaciones excepcionales de Queue
  */

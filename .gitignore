@@ -1,4 +1,5 @@
-ompiled class file
+# Compiled class file
+out/
 *.class
 .DS_Store
 # Log file

@@ -1,4 +1,4 @@
-package Practica1;
+package Practica1.Queue;
 
 public class Queue<T> {
 	private final int MAX_SIZE;
