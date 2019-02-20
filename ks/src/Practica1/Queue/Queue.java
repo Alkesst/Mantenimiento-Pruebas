@@ -1,5 +1,8 @@
+/*
+ * @author: Jesus Parejo Aliaga & Alejandro Garau Madrigal
+ */
 package Practica1.Queue;
-import Practica1.Queue.QueueException;
+
 
 public class Queue<T> {
 	private final int MAX_SIZE;

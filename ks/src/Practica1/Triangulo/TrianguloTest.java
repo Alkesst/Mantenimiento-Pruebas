@@ -1,3 +1,6 @@
+/*
+ * @author: Jesus Parejo Aliaga & Alejandro Garau Madrigal
+ */
 package Practica1.Triangulo;
 
 import org.junit.jupiter.api.Test;
@@ -108,5 +111,28 @@ class TrianguloTest {
         assertTrue(thrown.getMessage().contains("suma de lados"));
     }
 
+    @Test
+    void toStringTestCase() {
+        Triangulo triangulo = new Triangulo(3, 2, 3);
+        assertEquals(triangulo.toString(), "Triangulo{catetoA=3, catetoB=2, catetoC=3}");
+    }
+
+    @Test
+    void tipoReturnsIsoscelesWhenTheTriangleIsIsosceles() {
+        Triangulo triangulo = new Triangulo(5, 3, 3);
+        assertEquals(triangulo.tipo(), TipoTriangulo.Isosceles);
+    }
+
+    @Test
+    void tipoReturnsEquilateroWhenTheTriangleIsEquilatero() {
+        Triangulo triangulo = new Triangulo(5, 5, 5);
+        assertEquals(triangulo.tipo(), TipoTriangulo.Equilatero);
+    }
+
+    @Test
+    void tipoReturnsEscalenoWhenTheTriangleIsEscaleno() {
+        Triangulo triangulo = new Triangulo(5, 4, 3);
+        assertEquals(triangulo.tipo(), TipoTriangulo.Escaleno);
+    }
 
 }

@@ -1,3 +1,6 @@
+/*
+ * @author: Jesus Parejo Aliaga & Alejandro Garau Madrigal
+ */
 package Practica1.Triangulo;
 
 public class Triangulo {
@@ -35,5 +38,25 @@ public class Triangulo {
 
     public boolean esEquilatero() {
         return catetoA == catetoB && catetoB == catetoC;
+    }
+
+    public TipoTriangulo tipo() {
+        if(esEquilatero())
+            return TipoTriangulo.Equilatero;
+        if(esEscaleno())
+            return TipoTriangulo.Escaleno;
+        if(esIsosceles())
+            return TipoTriangulo.Isosceles;
+        // para que java no me llore
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Triangulo{" +
+                "catetoA=" + catetoA +
+                ", catetoB=" + catetoB +
+                ", catetoC=" + catetoC +
+                '}';
     }
 }
