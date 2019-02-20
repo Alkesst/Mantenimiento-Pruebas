@@ -53,7 +53,9 @@ public class QueueUnitTests {
 
     @Test
     public void cannotAddToFullQueues() {
-        Queue<Integer> queue = new Queue<>(0);
+        Queue<Integer> queue = new Queue<>(1);
+        // tenemos que llenar la queue primero
+        queue.enqueue(5);
         QueueException thrown = assertThrows(
                 QueueException.class,
                 () -> queue.enqueue(4)
@@ -65,6 +67,17 @@ public class QueueUnitTests {
     public void emptyQueue() {
         Queue<Integer> queue = new Queue<>(10);
         assertTrue(queue.empty());
+    }
+
+    @Test
+    public void queueOfSize0() {
+        QueueException thrown = assertThrows(QueueException.class, () -> new Queue<Integer>(0));
+    }
+
+    @Test
+    public void negativeQueue() {
+        QueueException thrown = assertThrows(QueueException.class,
+                () -> new Queue<Integer>(-1));
     }
 
 }
