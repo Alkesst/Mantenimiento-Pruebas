@@ -75,7 +75,7 @@ public class QueueUnitTests {
     }
 
     @Test
-    public void negativeQueue() {
+    public void negativeSizeQueue() {
         QueueException thrown = assertThrows(QueueException.class,
                 () -> new Queue<Integer>(-1));
     }
