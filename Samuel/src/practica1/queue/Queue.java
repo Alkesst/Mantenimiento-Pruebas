@@ -1,4 +1,5 @@
 package practica1.queue;
+import practica1.queue.QueueException;
 
 public class Queue<T> {
 	private final int MAX_SIZE;
@@ -8,6 +9,8 @@ public class Queue<T> {
 	private int size;
 
 	public Queue(int maxSize) {
+		if (maxSize <= 0)
+			throw new QueueException("queue of size " + maxSize + "not allowed");
 		MAX_SIZE = maxSize;
 		data = (T[]) new Object[maxSize];
 		head = 0;
@@ -30,7 +33,7 @@ public class Queue<T> {
 		size += 1;
 		tail += 1;
 		if (tail == MAX_SIZE) {
-			tail = 0;
+			tail = 1;
 		}
 	}
 
@@ -45,7 +48,7 @@ public class Queue<T> {
 		}
 		return element;
 	}
-	
+
 	public int size() {
 		return size;
 	}
