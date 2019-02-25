@@ -4,6 +4,9 @@
 package Practica1.Triangulo;
 
 public class Triangulo {
+    public enum TipoTriangulo {
+        Escaleno, Isosceles, Equilatero
+    }
     private int catetoA;
     private int catetoB;
     private int catetoC;
