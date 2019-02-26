@@ -48,12 +48,10 @@ public class Triangulo {
     public TipoTriangulo tipo() {
         if(esEquilatero())
             return TipoTriangulo.Equilatero;
-        if(esEscaleno())
-            return TipoTriangulo.Escaleno;
-        if(esIsosceles())
+        else if(esIsosceles())
             return TipoTriangulo.Isosceles;
-        // para que java no me llore
-        return null;
+        else
+            return TipoTriangulo.Escaleno;
     }
 
     @Override
@@ -65,9 +63,15 @@ public class Triangulo {
                 '}';
     }
 
-    public static Triangulo creaTriangulo(int ladoA, int ladoB, int ladoC) {
+    public static Triangulo creaTriangulo(String stringSides) {
+        int ladoA, ladoB, ladoC;
+        String[] sides = stringSides.split(" ");
+        if(sides.length != 3 )
+            throw new TrianguloException("No hay 3 lados proporcionados");
+        ladoA = Integer.parseInt(sides[0]);
+        ladoB = Integer.parseInt(sides[1]);
+        ladoC = Integer.parseInt(sides[2]);
         return new Triangulo(ladoA, ladoB, ladoC);
-
     }
 
     @Override

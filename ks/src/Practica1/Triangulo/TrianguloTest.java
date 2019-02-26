@@ -137,7 +137,14 @@ class TrianguloTest {
 
     @Test
     void createNewTriangle() {
-        assertEquals(new Triangulo(3, 3, 5), Triangulo.creaTriangulo(3, 3, 5));
+        assertEquals(new Triangulo(3, 3, 5), Triangulo.creaTriangulo("3 3 5"));
     }
 
+    @Test
+    void wrongNumberOfSidesThrowsException() {
+        TrianguloException thrown = assertThrows(
+                TrianguloException.class,
+                () -> Triangulo.creaTriangulo("3 3")
+        );
+    }
 }
