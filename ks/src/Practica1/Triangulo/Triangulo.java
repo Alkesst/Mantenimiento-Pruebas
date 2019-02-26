@@ -3,6 +3,8 @@
  */
 package Practica1.Triangulo;
 
+import java.util.Objects;
+
 public class Triangulo {
     public enum TipoTriangulo {
         Escaleno, Isosceles, Equilatero
@@ -61,5 +63,25 @@ public class Triangulo {
                 ", catetoB=" + catetoB +
                 ", catetoC=" + catetoC +
                 '}';
+    }
+
+    public static Triangulo creaTriangulo(int ladoA, int ladoB, int ladoC) {
+        return new Triangulo(ladoA, ladoB, ladoC);
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangulo triangulo = (Triangulo) o;
+        return catetoA == triangulo.catetoA &&
+                catetoB == triangulo.catetoB &&
+                catetoC == triangulo.catetoC;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(catetoA, catetoB, catetoC);
     }
 }

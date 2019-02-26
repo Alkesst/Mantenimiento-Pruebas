@@ -120,19 +120,24 @@ class TrianguloTest {
     @Test
     void tipoReturnsIsoscelesWhenTheTriangleIsIsosceles() {
         Triangulo triangulo = new Triangulo(5, 3, 3);
-        assertEquals(triangulo.tipo(), TipoTriangulo.Isosceles);
+        assertEquals(triangulo.tipo(), Triangulo.TipoTriangulo.Isosceles);
     }
 
     @Test
     void tipoReturnsEquilateroWhenTheTriangleIsEquilatero() {
         Triangulo triangulo = new Triangulo(5, 5, 5);
-        assertEquals(triangulo.tipo(), TipoTriangulo.Equilatero);
+        assertEquals(triangulo.tipo(), Triangulo.TipoTriangulo.Equilatero);
     }
 
     @Test
     void tipoReturnsEscalenoWhenTheTriangleIsEscaleno() {
         Triangulo triangulo = new Triangulo(5, 4, 3);
-        assertEquals(triangulo.tipo(), TipoTriangulo.Escaleno);
+        assertEquals(triangulo.tipo(), Triangulo.TipoTriangulo.Escaleno);
+    }
+
+    @Test
+    void createNewTriangle() {
+        assertEquals(new Triangulo(3, 3, 5), Triangulo.creaTriangulo(3, 3, 5));
     }
 
 }

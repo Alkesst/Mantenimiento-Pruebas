@@ -4,7 +4,7 @@
 package Practica1.Queue;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,6 +81,21 @@ public class QueueUnitTests {
     public void negativeSizeQueue() {
         QueueException thrown = assertThrows(QueueException.class,
                 () -> new Queue<Integer>(-1));
+    }
+
+    @Test
+    void multipleEnqueueAndDequeueTest() {
+        Queue<Integer> queue = new Queue<>(3);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        assertEquals(3, queue.dequeue());
+        assertEquals(4, queue.dequeue());
+        assertEquals(5, queue.dequeue());
+        queue.enqueue(2);
+        queue.enqueue(1);
+        assertEquals(2, queue.dequeue());
+        assertEquals(1, queue.dequeue());
     }
 
 }
