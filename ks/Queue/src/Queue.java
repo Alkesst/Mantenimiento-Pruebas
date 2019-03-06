@@ -1,7 +1,6 @@
 /*
  * @author: Jesus Parejo Aliaga & Alejandro Garau Madrigal
  */
-package Practica1.Queue;
 
 
 public class Queue<T> {
