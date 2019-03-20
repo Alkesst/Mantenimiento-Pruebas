@@ -29,7 +29,7 @@ class QueueTest {
         int sizePre = q.size();
         q.enqueue(5);
         assertEquals(q.size(), sizePre + 1);
-        assertEquals(5, q.dequeue());
+        assertEquals((int)5, (int)q.dequeue());
     }
 
     @org.junit.jupiter.api.Test
@@ -37,7 +37,7 @@ class QueueTest {
         Queue<Integer> q = new Queue<>(10);
         q.enqueue(5);
         int sizePre = q.size();
-        assertEquals(5, q.dequeue());
+        assertEquals((int)5, (int)q.dequeue());
         assertEquals(sizePre - 1, q.size());
     }
 
@@ -73,7 +73,7 @@ class QueueTest {
     void addedElementIsInTheQueue() {
         Queue<Integer> queue = new Queue<>(10);
         queue.enqueue(5);
-        assertEquals(queue.dequeue(), 5);
+        assertEquals((int)queue.dequeue(),(int) 5);
     }
 
     @Test
@@ -152,7 +152,7 @@ class QueueTest {
         q.dequeue();
         assertTrue(q.empty());
         q.enqueue(3);
-        assertEquals(3, q.dequeue());
+        assertEquals((int)3, (int)q.dequeue());
     }
 
 }

@@ -119,26 +119,74 @@ class TrianguloTest {
     }
 
     @Test
-    void toStringWorks(){
-        Triangulo t = new Triangulo(2,3,4);
+    void toStringWorks() {
+        Triangulo t = new Triangulo(2, 3, 4);
         assertEquals("A: 2, B: 3, C: 4", t.toString());
     }
 
-     @Test
-    void escalenoTipoEscaleno(){
-         Triangulo t = new Triangulo(2,3,4);
-         assertEquals(TipoTriangulo.escaleno, t.tipo());
-     }
+    @Test
+    void escalenoTipoEscaleno() {
+        Triangulo t = new Triangulo(2, 3, 4);
+        assertEquals(TipoTriangulo.escaleno, t.tipo());
+    }
 
     @Test
-    void isoscelesTipoIsosceles(){
-        Triangulo t = new Triangulo(2,4,4);
+    void isoscelesTipoIsosceles() {
+        Triangulo t = new Triangulo(2, 4, 4);
         assertEquals(TipoTriangulo.isosceles, t.tipo());
     }
 
     @Test
-    void equilateroTipoEquilatero(){
-        Triangulo t = new Triangulo(3,3,3);
+    void equilateroTipoEquilatero() {
+        Triangulo t = new Triangulo(3, 3, 3);
         assertEquals(TipoTriangulo.equilatero, t.tipo());
+    }
+
+    @Test
+    void crearTrianguloValidoEscaleno() {
+        Triangulo t = Triangulo.creaTriangulo("2 3 4");
+        assertTrue(t.esEscaleno());
+        assertEquals(TipoTriangulo.escaleno, t.tipo());
+    }
+
+    @Test
+    void crearTrianguloValidoIsosceles() {
+        Triangulo t = Triangulo.creaTriangulo("2 4 4");
+        assertTrue(t.esIsosceles());
+        assertEquals(TipoTriangulo.isosceles, t.tipo());
+    }
+
+    @Test
+    void crearTrianguloValidoEquilatero() {
+        Triangulo t = Triangulo.creaTriangulo("4 4 4");
+        assertTrue(t.esEquilatero());
+        assertEquals(TipoTriangulo.equilatero, t.tipo());
+    }
+
+    @Test
+    void crearTrianguloNumeroLadosDistinto3() {
+        TrianguloException thrown = assertThrows(TrianguloException.class, () -> Triangulo.creaTriangulo("1 2"));
+        assertEquals("no triangulo", thrown.getMessage());
+    }
+
+    @Test
+    void crearTrianguloLado0() {
+        TrianguloException thrown = assertThrows(TrianguloException.class, () -> Triangulo.creaTriangulo("1 2 0"));
+        assertEquals("lado 0 o negativo", thrown.getMessage());
+    }
+
+    @Test
+    void crearTrianguloLadoNegativo() {
+        TrianguloException thrown = assertThrows(TrianguloException.class, () -> Triangulo.creaTriangulo("1 -2 4"));
+        assertEquals("lado 0 o negativo", thrown.getMessage());
+    }
+
+    void crearTrianguloSumaLadosFalla() {
+        TrianguloException thrown = assertThrows(TrianguloException.class, () -> Triangulo.creaTriangulo("1 3 4"));
+        assertEquals("suma menor o igual", thrown.getMessage());
+    }
+
+    void crearTrianguloValorNoNumerico() {
+        assertThrows(NumberFormatException.class, () -> Triangulo.creaTriangulo("1 3 auicda"));
     }
 }
