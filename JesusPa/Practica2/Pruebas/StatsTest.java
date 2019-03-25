@@ -8,31 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class StatsTest {
-	/*
-	@Test
-	public void media0Elementos() {
-		Stats stat = new Stats(new int[5]);
-		RuntimeException runtimeException = assertThrows(RuntimeException.class, stat::media);
-	}
-	
-	@Test
-	public void varianza0Elementos() {
-		Stats stat = new Stats(new int[5]);
-		RuntimeException runtimeException = assertThrows(RuntimeException.class, stat::varianza);
-	}
-	
-	@Test
-	public void mediana0Elementos() {
-		Stats stat = new Stats(new int[5]);
-		RuntimeException runtimeException = assertThrows(RuntimeException.class, stat::mediana);
-	}
-	
-	@Test
-	public void moda0Elementos() {
-		Stats stat = new Stats(new int[5]);
-		RuntimeException runtimeException = assertThrows(RuntimeException.class, stat::moda);
-	}
-	*/
 	
 	@Test
 	public void vectorNullLanzaError() {
