@@ -4,7 +4,10 @@ out/
 .DS_Store
 # Log file
 *.log
-
+.classpath
+.gitignore
+.project
+.metadata/
 # BlueJ files
 *.ctxt
 
