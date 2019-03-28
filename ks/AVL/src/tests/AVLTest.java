@@ -6,6 +6,7 @@
 package tests;
 
 
+import arboles.ABBException;
 import arboles.AVL;
 import arboles.ArbolBinario;
 import listas.Lista;
@@ -117,5 +118,77 @@ public class AVLTest {
         avl.inserta(12);
         Integer[] expectedValues = new Integer[]{11, 12, 23, 35, 38, 39, 41, 42, 43, 46, 49, 74, 80, 96};
         compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test 
+    void deleteNodeThatNotExistsFromAVLTest() {
+    	AVL<Integer> avl = construyeArbol(46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43);
+    	avl.elimina(295);
+    	Integer[] expectedValues = new Integer[]{11, 23, 35, 38, 39, 41, 42, 43, 46, 49, 74, 80, 96};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void deleteNodeThatExistsFromAVLWithoutRotationTest() {
+    	AVL<Integer> avl = construyeArbol(46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43);
+    	avl.elimina(41);
+    	Integer[] expectedValues = new Integer[]{11, 23, 35, 38, 39, 42, 43, 46, 49, 74, 80, 96};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void deleteNodeThatExistsFromAVLWithRotationLeftLeftTest() {
+    	AVL<Integer> avl = construyeArbol(46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43);
+    	avl.elimina(11);
+    	Integer[] expectedValues = new Integer[]{23, 35, 38, 39, 41, 42, 43, 46, 49, 74, 80, 96};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void deleteNodeThatExistsFromAVLWithRotationRightRightTest() {
+    	AVL<Integer> avl = construyeArbol(46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 48, 41, 43);
+    	avl.elimina(80);
+    	Integer[] expectedValues = new Integer[]{11, 23, 35, 38, 39, 41, 42, 43, 46, 48, 49, 74};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void deleteNodeThatExistsFromAVLWithRotationRightLeftTest() {
+    	AVL<Integer> avl = construyeArbol(46, 23, 50, 11, 39, 51, 38, 42);
+    	avl.elimina(51);
+    	Integer[] expectedValues = new Integer[]{11, 23, 38, 39, 42, 46, 50};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void deleteNodeThatExistsFromAVLWithRotationLeftRightTest() {
+    	AVL<Integer> avl = construyeArbol(40, 38, 50, 39, 48, 51, 47, 49);
+    	avl.elimina(39);
+    	Integer[] expectedValues = new Integer[]{38, 40, 47, 48, 49, 50, 51};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test 
+    void deleteNodeThatNotExistsFromAVL1ItemTest() {
+    	AVL<Integer> avl = construyeArbol(2);
+    	avl.elimina(3);
+    	Integer[] expectedValues = new Integer[]{2};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test 
+    void deleteNodeThatExistsFromAVL1ItemTest() {
+    	AVL<Integer> avl = construyeArbol(2);
+    	avl.elimina(2);
+    	Integer[] expectedValues = new Integer[]{};
+    	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test 
+    void deleteNodeFromEmptyAVLTest() {
+    	AVL<Integer> avl = construyeArbol();
+    	avl.elimina(2);
+    	Integer[] expectedValues = new Integer[]{};
+    	compruebaAVL(expectedValues, avl);
     }
 }
