@@ -14,7 +14,7 @@ public class Triangulo {
         String[] ladosString = args.split("\\s++");
         int[] lados = new int[3];
         if (ladosString.length != 3) {
-            throw new TrianguloException("numero lados distinto");
+            throw new TrianguloException("no triangulo");
         }
         for (int i = 0; i<ladosString.length; i++) {
             lados[i] = Integer.parseInt(ladosString[i]);
