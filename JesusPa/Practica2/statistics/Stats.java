@@ -69,7 +69,7 @@ public class Stats {
 		boolean iguales = true;
 		List<Integer> mode = new LinkedList<Integer>();
 		for (Integer i : frecs.keySet()) {
-			if (frecs.get(i) != mode_times) {
+			if (!mode.isEmpty() && frecs.get(i) != mode_times) {
 				iguales = false;
 			}
 			if (frecs.get(i) > mode_times) {
