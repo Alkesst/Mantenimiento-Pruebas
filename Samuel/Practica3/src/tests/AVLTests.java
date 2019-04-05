@@ -7,6 +7,7 @@ package tests;
 import listas.*;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 
@@ -52,7 +53,7 @@ public class AVLTests {
 	
 	@Test
 	public void insertarNodoArbolVacio() {
-		AVL<Integer> arbol = avlArray(new Integer[] {2});
+		AVL<Integer> arbol = avlArray(new Integer[] {});
 		arbol.inserta(2);
 		compruebaAVL(new Integer[]{2}, arbol);
 	}
@@ -130,5 +131,88 @@ public class AVLTests {
 		compruebaAVL(expected, arbol);
 	}
 	
+	@Test
+	public void borrarNodoArbolVacio() {
+		AVL<Integer> arbol = avlArray(new Integer[] {});
+		ABBException thrown = assertThrows(
+				ABBException.class,
+                () -> arbol.elimina(2)
+        );
+	}
 	
+	@Test
+	public void borrarNodoNoExiste1Elemento() {
+		AVL<Integer> arbol = avlArray(new Integer[] {3});
+		ABBException thrown = assertThrows(
+				ABBException.class,
+                () -> arbol.elimina(2)
+        );
+	}
+	
+	@Test
+	public void borrarNodoExiste1Elemento() {
+		AVL<Integer> arbol = avlArray(new Integer[] {3});
+		arbol.elimina(3);
+		compruebaAVL(new Integer[]{}, arbol);
+	}
+	
+	@Test
+	public void borrarNodoExisteNElementosNoDeseq() {
+		Integer[] valors = {46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43};
+		Integer[] expected = {46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 43};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.elimina(41);
+		Arrays.sort(expected);
+		compruebaAVL(expected, arbol);
+	}
+	
+	@Test
+	public void borrarNodoNoExisteNElementos() {
+		Integer[] valors = {46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43};
+		AVL<Integer> arbol = avlArray(valors);
+		ABBException thrown = assertThrows(
+				ABBException.class,
+                () -> arbol.elimina(295)
+        );
+	}
+	
+	@Test
+	public void borrarNodoExisteNElementosIzqIzq() {
+		Integer[] valors = {46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43};
+		Integer[] expected = {46, 35, 74, 23, 39, 49, 80, 38, 42, 96, 41, 43};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.elimina(11);
+		Arrays.sort(expected);
+		compruebaAVL(expected, arbol);
+	}
+	
+	@Test
+	public void borrarNodoExisteNElementosDerIzq() {
+		Integer[] valors = {46, 23, 50, 11, 39, 51, 38, 42};
+		Integer[] expected = {46, 23, 50, 11, 39, 38, 42};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.elimina(51);
+		Arrays.sort(expected);
+		compruebaAVL(expected, arbol);
+	}
+	
+	@Test
+	public void borrarNodoExisteNElementosDerDer() {
+		Integer[] valors = {46, 35, 74, 23, 39, 49, 80, 11, 38, 42, 96, 41, 43};
+		Integer[] expected = {46, 35, 74, 11, 39, 49, 80, 23, 38, 42, 41, 43};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.elimina(96);
+		Arrays.sort(expected);
+		compruebaAVL(expected, arbol);
+	}
+	
+	@Test
+	public void borrarNodoExisteNElementosIzqDer() {
+		Integer[] valors = {40, 38, 50, 39, 48, 51, 47, 49};
+		Integer[] expected = {40, 38, 50, 48, 51, 47, 49};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.elimina(39);
+		Arrays.sort(expected);
+		compruebaAVL(expected, arbol);
+	}
 }
