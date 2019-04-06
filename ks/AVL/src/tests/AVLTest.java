@@ -1,6 +1,6 @@
 /***
  * Alejandro Garau Madrigal
- * RaÃºl Morales Perujo
+ * Raúl Morales Perujo
  */
 
 package tests;
@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
-AVL.equals no esta bien implementado
+	Los métodos equals(), hashCode() y compareTo() no están implementados y deberian estarlo.
+	Los test de compareTo() ni siquiera se pueden realizar ya que no es posible llamar a la función.
+	Los de equals() y hashCode() son los proporcionados por Java que son incorrectos en este caso.
 */
 
 public class AVLTest {
@@ -190,5 +192,35 @@ public class AVLTest {
     	avl.elimina(2);
     	Integer[] expectedValues = new Integer[]{};
     	compruebaAVL(expectedValues, avl);
+    }
+    
+    @Test
+    void equalsAVLTest() {
+    	AVL<Integer> avl1 = construyeArbol(1,2,3,4);
+    	AVL<Integer> avl2 = construyeArbol(1,2,3,4);
+    	assertEquals(avl1, avl2);
+    }
+    
+    @Test
+    void notEqualsAVLTest() {
+    	AVL<Integer> avl1 = construyeArbol(5,6,7,8);
+    	AVL<Integer> avl2 = construyeArbol(1,2,3,4);
+    	assertNotEquals(avl1, avl2);
+    } 
+        
+    @Test
+    void sameHashCodeAVLTest() {
+    	AVL<Integer> avl1 = construyeArbol(1,2,3,4);
+    	AVL<Integer> avl2 = construyeArbol(1,2,3,4);
+    	
+    	assertEquals(avl1.hashCode(), avl2.hashCode());
+    }
+    
+    @Test
+    void notSameHashCodeAVLTest() {
+    	AVL<Integer> avl1 = construyeArbol(1,2,3,4);
+    	AVL<Integer> avl2 = construyeArbol(5,6,7,8);
+    	
+    	assertNotEquals(avl1.hashCode(), avl2.hashCode());
     }
 }
