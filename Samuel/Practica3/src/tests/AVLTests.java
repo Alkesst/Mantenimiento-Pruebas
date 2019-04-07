@@ -215,4 +215,22 @@ public class AVLTests {
 		Arrays.sort(expected);
 		compruebaAVL(expected, arbol);
 	}
+	
+	@Test
+	public void insertarPasandoPor1_4_8_15() {
+		Integer[] valors = {40,38};
+		Integer[] expected = {37,38,40};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.inserta(37);
+		compruebaAVL(expected, arbol);
+	}
+	
+	@Test
+	public void insertarPasandoPor1_4_8_10() {
+		Integer[] valors = {38,40};
+		Integer[] expected = {38,40,41};
+		AVL<Integer> arbol = avlArray(valors);
+		arbol.inserta(41);
+		compruebaAVL(expected, arbol);
+	}
 }
