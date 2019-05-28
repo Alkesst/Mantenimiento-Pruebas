@@ -1,12 +1,11 @@
 /***
- * Alejandro Garau Madrigal
- * Raúl Morales Perujo
+ * @author: Raul Morales Perujo
+ * @author: Alejandro Garau Madrigal
  */
 
 package tests;
 
 
-import arboles.ABBException;
 import arboles.AVL;
 import arboles.ArbolBinario;
 import listas.Lista;
@@ -15,8 +14,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
-	Los métodos equals(), hashCode() y compareTo() no están implementados y deberian estarlo.
-	Los test de compareTo() ni siquiera se pueden realizar ya que no es posible llamar a la función.
+	Los mï¿½todos equals(), hashCode() y compareTo() no estï¿½n implementados y deberian estarlo.
+	Los test de compareTo() ni siquiera se pueden realizar ya que no es posible llamar a la funciï¿½n.
 	Los de equals() y hashCode() son los proporcionados por Java que son incorrectos en este caso.
 */
 
