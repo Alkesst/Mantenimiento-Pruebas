@@ -1,7 +1,9 @@
 package test;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -45,17 +47,17 @@ public class SearchBrokenLinks {
 	}
 	
 	private static void visitNewWebComponent(WebLevelComponent wlc) {
+		if(brokenLink(wlc.getUrl())) {
+			wlc.setIsBroken();
+			return;
+		}
 		if(wlc.getLevel() == maxLevel) {
 			driver.get(wlc.getUrl());
 			wlc.setPageName(driver.getTitle());
 			return;
 		}
-		if(brokenLink(wlc.getUrl())) {
-			wlc.setIsBroken();
-			return;
-		}
 		driver.get(wlc.getUrl());
-		visitedElements.add(wlc.getUrl());
+		visitedElements.add(cleanUpURL(wlc.getUrl()));
 		wlc.setPageName(driver.getTitle());
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		for(WebElement we : links) {
@@ -63,12 +65,9 @@ public class SearchBrokenLinks {
 			try {
 				 newURL = we.getAttribute("href");
 			} catch(StaleElementReferenceException a) {
-				
+				System.err.println("Error en el link actual.");
 			}
-			if(newURL == null) {
-				//we.click();
-				//links.addAll(we.findElements(By.tagName("a")));
-			} else {
+			if((newURL != null) && notVisitedAndValidURL(newURL)) {
 				wlc.addChild(new WebLevelComponent(newURL, wlc.getLevel() + 1));
 			}
 		}
@@ -81,7 +80,12 @@ public class SearchBrokenLinks {
 	
 	
 	private static boolean notVisitedAndValidURL(String href) {
-		return href.contains(domainURL) && !visitedElements.contains(href);
+		String temp = cleanUpURL(href);
+		return !temp.contains("mailto:") && 
+				temp.contains(domainURL) && 
+				!visitedElements.contains(temp) && 
+				!href.contains("mailto:") && !href.contains("javascript") 
+				&& !href.contains("tel:");
 	}
 	
 	
@@ -93,7 +97,7 @@ public class SearchBrokenLinks {
 		String webURL = args[0];
 		String urlPattern = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 		if(!webURL.matches(urlPattern)) {
-			System.err.println("Not a valid web URL");
+			System.err.println("Malformed URL.");
 			System.exit(-1);
 		}
 		String[] splittedWebURL = webURL.split("[.]");
@@ -105,6 +109,8 @@ public class SearchBrokenLinks {
 		WebLevelComponent wlc = new WebLevelComponent(webURL, 0);
 		visitNewWebComponent(wlc);
 		System.out.println(wlc);
+		driver.quit();
+		dumpToFile(domainURL, explorer, maxLevel, wlc);
 	}
 	
 	public static boolean brokenLink(String url) {
@@ -122,5 +128,30 @@ public class SearchBrokenLinks {
 			
 		}
 		return respCode == -1 || respCode >= 400;
+	}
+	
+	private static String cleanUpURL(String href) {
+		String temp = href.replace("https://", "");
+		temp = temp.replace("http://", "");
+		String[] tempArray = temp.split("\\?");
+		temp = tempArray[0];
+		temp = temp.replace("#", "");
+		tempArray = temp.split(";");
+		temp = tempArray[0];
+		if(temp.length() != 0 && temp.charAt(temp.length()-1) == '/') {
+			temp = temp.substring(0, temp.length() - 1);
+		}
+		System.out.println(temp);
+		return temp;
+	}
+	
+	private static void dumpToFile(String url, String explorer, int deep ,WebLevelComponent wlc) {
+		try {
+		PrintWriter out = new PrintWriter("output.txt");
+		out.write(url + " " + explorer + " " + Integer.toString(deep) + "\n");
+		out.write(wlc.toString());
+		} catch(FileNotFoundException a) {
+			System.err.println("The file does not exist");
+		}
 	}
 }
