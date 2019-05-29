@@ -22,6 +22,7 @@ public class SearchBrokenLinks {
 	private static List<String> visitedElements = new ArrayList<>();
 	private static int maxLevel;
 	private static String domainURL;
+	private static final String IDUMA_URL = "idp.uma.es";
 	
 	private static final String PATH = "/Users/alec/Documents/Universidad/Tercero/2Cuatri/";
 	
@@ -54,6 +55,10 @@ public class SearchBrokenLinks {
 		driver.get(wlc.getUrl());
 		visitedElements.add(cleanUpURL(wlc.getUrl()));
 		wlc.setPageName(driver.getTitle());
+		if(driver.getCurrentUrl().contains(IDUMA_URL)){
+			wlc.setIDUMA();
+			return;
+		}
 		if(wlc.getLevel() == maxLevel) {
 			return;
 		}
