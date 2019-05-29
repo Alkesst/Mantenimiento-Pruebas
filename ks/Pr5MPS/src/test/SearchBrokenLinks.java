@@ -24,7 +24,7 @@ public class SearchBrokenLinks {
 	private static String domainURL;
 	private static final String IDUMA_URL = "idp.uma.es";
 	
-	private static final String PATH = "/Users/alec/Documents/Universidad/Tercero/2Cuatri/";
+	private static final String PATH = "/home/sjuradoq/Descargas/";
 	
 	private static void setWebDriver(String explorer) {
 		switch(explorer) {
@@ -67,6 +67,10 @@ public class SearchBrokenLinks {
 			String newURL = null;
 			try {
 				 newURL = we.getAttribute("href");
+				 if(newURL.endsWith("#")){
+				 	we.click();
+				 	links.addAll(we.findElements(By.tagName("a")));
+				 }
 			} catch(StaleElementReferenceException a) {
 				System.err.println("Error en el link actual.");
 			}
