@@ -51,14 +51,12 @@ public class SearchBrokenLinks {
 			wlc.setIsBroken();
 			return;
 		}
-		if(wlc.getLevel() == maxLevel) {
-			driver.get(wlc.getUrl());
-			wlc.setPageName(driver.getTitle());
-			return;
-		}
 		driver.get(wlc.getUrl());
 		visitedElements.add(cleanUpURL(wlc.getUrl()));
 		wlc.setPageName(driver.getTitle());
+		if(wlc.getLevel() == maxLevel) {
+			return;
+		}
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		for(WebElement we : links) {
 			String newURL = null;
